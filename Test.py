@@ -3,18 +3,22 @@ import psycopg2
 try:
     connection = psycopg2.connect(user = "postgres",
                                   password = "na",
-                                  host = "127.0.0.1",
+                                  host = "192.168.137.101",
                                   port = "5432",
-                                  database = "AH")
+                                  database = "pr")
 
     cursor = connection.cursor()
     # Print PostgreSQL Connection properties
     print ( connection.get_dsn_parameters(),"\n")
 
-    # Print PostgreSQL version
-    cursor.execute("SELECT version();")
-    record = cursor.fetchone()
-    print("You are connected to - ", record,"\n")
+    create_table_query = '''CREATE TABLE bier
+          (kaas INT PRIMARY KEY     NOT NULL,
+          borrelnootjes           TEXT    NOT NULL,
+          bittergarnituur         REAL); '''
+
+    cursor.execute(create_table_query)
+    connection.commit()
+    print("Table created successfully in PostgreSQL ")
 
 except (Exception, psycopg2.Error) as error :
     print ("Error while connecting to PostgreSQL", error)
