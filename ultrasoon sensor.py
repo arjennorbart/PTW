@@ -1,4 +1,4 @@
-# Libraries
+#Libraries
 import RPi.GPIO as GPIO
 import time
 
@@ -8,15 +8,14 @@ GPIO.setmode(GPIO.BCM)
 # set GPIO Pins
 GPIO_TRIGGER = 4
 GPIO_ECHO = 27
-GPIO_GREENLIGHT = 18
-GPIO_REDLIGHT = 22
+GPIO_GREENLIGHT=18
+GPIO_REDLIGHT=22
 
 # set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
 GPIO.setup(GPIO_GREENLIGHT, GPIO.OUT)
 GPIO.setup(GPIO_REDLIGHT, GPIO.OUT)
-
 
 def distance():
     # set Trigger to HIGH
@@ -44,38 +43,36 @@ def distance():
     distance = (TimeElapsed * 34300) / 2
 
     return distance
-
-
-# Turning led's on and off
-
-
-while True:
-    if distance() >= 10:
-        GPIO.output(GPIO_REDLIGHT, False)
-        time.sleep(.1)
-        GPIO.output(GPIO_GREENLIGHT, True)
-        time.sleep(.1)
-    elif distance() < 10:
-        time.sleep(.1)
-        GPIO.output(GPIO_GREENLIGHT, False)
-        time.sleep(.1)
-        GPIO.output(GPIO_REDLIGHT, True)
-        time.sleep(.1)
-    else:
-        break
-
-# Display the distance
+    
+    
+# Display the distance and turn lights on or off
 try:
     while True:
+        #Display distance
         dist = distance()
         print("Measured Distance = %.1f cm" % dist)
         time.sleep(1)
+        #turn on Green LED when distance is bigger or equal to 10
+        if distance() >= 10:
+            GPIO.output(GPIO_REDLIGHT, False)
+            time.sleep(.1)
+            GPIO.output(GPIO_GREENLIGHT, True)
+            time.sleep(.1)
+        #turn off Green LED and turn on Red LED when distance is less then 10
+        elif distance() < 10:
+            time.sleep(.1)
+            GPIO.output(GPIO_GREENLIGHT, False)
+            time.sleep(.1)
+            GPIO.output(GPIO_REDLIGHT, True)
+            time.sleep(.1)
+        else:
+            break
+             
 
-
-
-
-# Reset by pressing CTRL + C
+# Stopping programm and Reset by pressing CTRL + C
 except KeyboardInterrupt:
     print("Measurement stopped by User")
     GPIO.cleanup()
+
+
 
