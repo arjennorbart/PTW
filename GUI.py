@@ -8,6 +8,8 @@ def auto():
     elif user_input.get() == "groen":
         user_input.delete(0, END)
         available_parking_spaces["text"] = "1"
+    elif user_input.get() == "exit":
+        exit()
     else:
         user_input.delete(0, END)
         available_parking_spaces["text"] = "vul in: rood of groen"
