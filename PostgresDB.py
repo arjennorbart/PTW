@@ -37,7 +37,7 @@ try:
           (automaatID INT NOT NULL,
           locatie           VARCHAR(255)    ,
           verdieping         INT ,
-          Parkeergaragevestigingnummer INT,
+          Parkeergaragevestigingnummer INT NOT NULL ,
           PRIMARY KEY(automaatID));
  
 ALTER TABLE Parkeervak ADD FOREIGN KEY(Parkeergaragevestigingnummer) REFERENCES Parkeergarage(vestigingnummer); 
