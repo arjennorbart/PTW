@@ -1,15 +1,15 @@
 import psycopg2
 
 try:
-    connection = psycopg2.connect(user = "postgres",
-                                  password = "na",
-                                  host = "127.0.0.1",
-                                  port = "5432",
-                                  database = "AH")
+    connection = psycopg2.connect(user="postgres",
+                                  password="na",
+                                  host="127.0.0.1",
+                                  port="5432",
+                                  database="AH")
 
     cursor = connection.cursor()
     # Print PostgreSQL Connection properties
-    print ( connection.get_dsn_parameters(),"\n")
+    print(connection.get_dsn_parameters(), "\n")
 
     create_table_query = '''CREATE TABLE Parkeergarage
           (vestigingnummer INT NOT NULL,
@@ -52,8 +52,8 @@ ALTER TABLE Betaalautomaat ADD FOREIGN KEY(Parkeergaragevestigingnummer) REFEREN
 except (Exception, psycopg2.Error) as error:
     print("Error while connecting to PostgreSQL", error)
 finally:
-    #closing database connection.
-    if(connection):
+    # closing database connection.
+    if (connection):
         cursor.close()
         connection.close()
         print("PostgreSQL connection is closed")
