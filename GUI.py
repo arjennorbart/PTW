@@ -1,14 +1,11 @@
+from time import sleep
 from tkinter import *
 from RequestDATA import *
 
 result = fetch_constant()
-
-
-def auto():
-    """test functie"""
-    res2 = next(result)
-    available_parking_spaces["text"] = res2
-
+res_tuple = next(result)
+res_int = res_tuple[0]
+show_availability = "{}/250 spaces available".format(res_int)
 
 root = Tk()
 
@@ -28,19 +25,21 @@ center_frame = Frame(main_frame, relief='raised', borderwidth=3)
 center_frame.place(relx=0.5, rely=0.5, anchor=CENTER)
 
 available_parking_spaces = Label(center_frame,
-                                 text="",
+                                 text=show_availability,
                                  font=('Helvetica', 34, 'bold italic'),
                                  fg="blue",
-                                 height=6
+                                 height=6,
                                  )
 available_parking_spaces.pack()
 
-button = Button(center_frame,
-                width=20,
-                text="click",
-                command=auto
-                )
-button.pack()
 
+def refresh():
+    res_tuple = next(result)
+    res_int = res_tuple[0]
+    show_availability = "{}/250 \nspaces available".format(250 - res_int)
+    available_parking_spaces["text"] = show_availability
+    root.after(500, refresh)
+
+
+refresh()
 mainloop()
-
