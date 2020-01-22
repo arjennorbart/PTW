@@ -1,15 +1,13 @@
 import psycopg2
-import time
-
 
 def fetch_constant():
     while True:
         try:
             connection = psycopg2.connect(user="postgres",
                                           password="na",
-                                          host="127.0.0.1",
-                                          port="5432",
-                                          database="bieb")
+                                          host="83.83.6.133",
+                                          port="4090",
+                                          database="pr")
             cursor = connection.cursor()
             postgreSQL_select_Query = "SELECT * FROM Parkeervak;"
 

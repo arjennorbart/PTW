@@ -3,18 +3,16 @@ import psycopg2
 try:
     connection = psycopg2.connect(user="postgres",
                                   password="na",
-                                  host="192.168.137.101",
-                                  port="5432",
+                                  host="83.83.6.133",
+                                  port="4090",
                                   database="pr")
 
     cursor = connection.cursor()
     # Print PostgreSQL Connection properties
     print(connection.get_dsn_parameters(), "\n")
 
-    create_table_query = '''CREATE TABLE Parkeervak
-          (vaknummer INT NOT NULL,
-          PRIMARY KEY(vaknummer)     
-          );  '''
+    create_table_query = '''DELETE FROM Parkeervak;
+INSERT INTO Parkeervak VALUES (12);  '''
 
     cursor.execute(create_table_query)
     connection.commit()
