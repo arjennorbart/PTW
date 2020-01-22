@@ -49,11 +49,11 @@ ALTER TABLE Betaalautomaat ADD FOREIGN KEY(Parkeergaragevestigingnummer) REFEREN
     connection.commit()
     print("Table created successfully in PostgreSQL ")
 
-except (Exception, psycopg2.Error) as error :
-    print ("Error while connecting to PostgreSQL", error)
+except (Exception, psycopg2.Error) as error:
+    print("Error while connecting to PostgreSQL", error)
 finally:
     #closing database connection.
-        if(connection):
-            cursor.close()
-            connection.close()
-            print("PostgreSQL connection is closed")
+    if(connection):
+        cursor.close()
+        connection.close()
+        print("PostgreSQL connection is closed")
