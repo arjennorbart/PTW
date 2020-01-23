@@ -43,7 +43,6 @@ def refresh():
         res_int = 0
     else:
         res_int = res_tuple[0]
-    # res_int = res_tuple[0]
     show_availability = "{}/250 \nspaces available".format(250 - res_int)
     show_available_parking_spaces["text"] = show_availability
     root.after(500, refresh)
