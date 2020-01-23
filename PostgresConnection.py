@@ -11,10 +11,10 @@ try:
     # Print PostgreSQL Connection properties
     print(connection.get_dsn_parameters(), "\n")
 
-    create_table_query = '''DELETE FROM Parkeervak;
+    insert_query = '''DELETE FROM Parkeervak;
 INSERT INTO Parkeervak VALUES (12);  '''
 
-    cursor.execute(create_table_query)
+    cursor.execute(insert_query)
     connection.commit()
     print("Table created successfully in PostgreSQL ")
 
