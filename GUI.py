@@ -9,7 +9,7 @@ if res_tuple is None:
 else:
     res_int = res_tuple[0]
 
-show_availability = "{}/250 spaces available".format(res_int)
+show_availability = "{}/250 \nspaces available".format(res_int)
 
 root = Tk()
 
@@ -38,6 +38,7 @@ show_available_parking_spaces.pack()
 
 
 def refresh():
+    """refreshes data every 0.5 seconds from database"""
     res_tuple = next(result)
     if res_tuple is None:
         res_int = 0
