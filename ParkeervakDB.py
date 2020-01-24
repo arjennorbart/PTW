@@ -5,7 +5,7 @@ try:
                                   password="na",
                                   host="127.0.0.1",
                                   port="5432",
-                                  database="bieb")
+                                  database="AH")
 
     cursor = connection.cursor()
     # Print PostgreSQL Connection properties

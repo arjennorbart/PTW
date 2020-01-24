@@ -5,7 +5,7 @@ def fetch_constant():
         try:
             connection = psycopg2.connect(user="postgres",
                                           password="na",
-                                          host="83.83.6.133",
+                                          host="192.168.137.10",
                                           port="4090",
                                           database="pr")
             cursor = connection.cursor()
