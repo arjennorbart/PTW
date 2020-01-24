@@ -1,6 +1,7 @@
 #Libraries
 import RPi.GPIO as GPIO
 import time
+import psycopg2
 
 # GPIO Mode (BOARD / BCM)
 GPIO.setmode(GPIO.BCM)
@@ -44,7 +45,7 @@ def distance():
 
     return distance
     
-    
+
 # Display the distance and turn lights on or off
 try:
     while True:
@@ -57,14 +58,76 @@ try:
             GPIO.output(GPIO_REDLIGHT, False)
             time.sleep(.1)
             GPIO.output(GPIO_GREENLIGHT, True)
-            time.sleep(.1)
+            time.sleep(1)
+            connection = psycopg2.connect(user="postgres",
+
+                                  password="na",
+
+                                  host="83.83.6.133",
+
+                                  port="4090",
+
+                                  database="pr")
+
+
+
+            cursor = connection.cursor()
+
+            # Print PostgreSQL Connection properties
+
+            #print(connection.get_dsn_parameters(), "\n")
+
+
+
+            insert_query = '''DELETE FROM Parkeervak;
+
+            INSERT INTO Parkeervak VALUES (0);  '''
+
+
+
+            cursor.execute(insert_query)
+
+            connection.commit()
+
+            print(" connection successfully in PostgreSQL ")
         #turn off Green LED and turn on Red LED when distance is less then 10
         elif distance() < 10:
             time.sleep(.1)
             GPIO.output(GPIO_GREENLIGHT, False)
             time.sleep(.1)
             GPIO.output(GPIO_REDLIGHT, True)
-            time.sleep(.1)
+            time.sleep(1)
+            connection = psycopg2.connect(user="postgres",
+
+                                  password="na",
+
+                                  host="83.83.6.133",
+
+                                  port="4090",
+
+                                  database="pr")
+
+
+
+            cursor = connection.cursor()
+
+            # Print PostgreSQL Connection properties
+
+            #print(connection.get_dsn_parameters(), "\n")
+
+
+
+            insert_query = '''DELETE FROM Parkeervak;
+
+            INSERT INTO Parkeervak VALUES (1);  '''
+
+
+
+            cursor.execute(insert_query)
+
+            connection.commit()
+
+            print("Table created successfully in PostgreSQL ")
         else:
             break
              
@@ -73,6 +136,3 @@ try:
 except KeyboardInterrupt:
     print("Measurement stopped by User")
     GPIO.cleanup()
-
-
-
