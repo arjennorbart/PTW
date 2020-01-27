@@ -16,6 +16,7 @@ root = Tk()
 # fullscreen
 width, height = root.winfo_screenwidth(), root.winfo_screenheight()
 root.geometry("%dx%d+0+0" % (width, height))
+root.title("Available Parking Spots")
 
 main_frame = Frame(root, relief='raised', borderwidth=3)
 main_frame.pack(fill=BOTH, expand=YES)
