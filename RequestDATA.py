@@ -4,10 +4,10 @@ def fetch_constant():
     while True:
         try:
             connection = psycopg2.connect(user="postgres",
-                                  password="na",
-                                  host="83.83.6.133",
-                                  port="4090",
-                                  database="pr")
+                                          password="na",
+                                          host="192.168.137.10",
+                                          port="4090",
+                                          database="pr")
             cursor = connection.cursor()
             postgreSQL_select_Query = "SELECT * FROM Parkeervak;"
 
